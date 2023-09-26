@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: Omen
+Version: 0.0.1
+Summary: Generates CL string for copmiling c/cc projects
+Author: Aslan
+Project-URL: Homepage, https://github.com/As14n/Omen/tree/main
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+Generates CL string for copmiling c/cc projects

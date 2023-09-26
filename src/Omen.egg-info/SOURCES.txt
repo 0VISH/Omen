@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/Omen/__init__.py
+src/Omen/main.py
+src/Omen.egg-info/PKG-INFO
+src/Omen.egg-info/SOURCES.txt
+src/Omen.egg-info/dependency_links.txt
+src/Omen.egg-info/top_level.txt
