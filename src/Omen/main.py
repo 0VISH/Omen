@@ -15,6 +15,7 @@ def setBuildDir(platform, isDebug):
     if isDbg: buildDir += "dbg/"
     else: buildDir += "rls/"
     if not os.path.isdir(buildDir): os.makedirs(buildDir)
+def getBuildDir(): return buildDir
 
 def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", defines=[]):
     if compiler not in ("clang++", "cl", "clang"):
@@ -26,6 +27,7 @@ def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", def
         quit()
     
     defineStr = " "
+    if plat == "lin" and compiler == "cl": compiler = "clang++"
     if compiler == "cl":
         for i in defines: defineStr += "/D " + i + "=true "
         defineStr += "/D WIN=true /D LIN=false "
@@ -58,4 +60,3 @@ def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", def
             buildCmd += "-o " + fileName
 
     runCmd(buildCmd, plat=="lin")
-    return buildDir
