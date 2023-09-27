@@ -17,7 +17,7 @@ def setBuildDir(platform, isDebug):
     if not os.path.isdir(buildDir): os.makedirs(buildDir)
 def getBuildDir(): return buildDir
 
-def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", defines=[]):
+def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", defines=[], includes=[]):
     if compiler not in ("clang++", "cl", "clang"):
         print("Unkown compiler:", compiler)
         quit()
@@ -33,13 +33,14 @@ def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", def
         defineStr += "/D WIN=true /D LIN=false "
         if isDbg: defineStr += "/D RLS=false /D DBG=true "
         else: defineStr += "/D RLS=true /D DBG=false /O2 "
+        for i in includes: defineStr += "/I " + i + " "
     else:
         for i in defines: defineStr += "-D " + i + "=true "
         if plat == "win": defineStr = "-D WIN=true -D LIN=false "
         else: defineStr = "-D WIN=false -D LIN=true "
         if isDbg: defineStr += "-D RLS=false -D DBG=true -O0 -g -gcodeview "
         else: defineStr += "-D RLS=false -D DBG=false -O3 "
-
+        for i in includes: defineStr += "-I " + i + " "
     fileName = buildDir + outName
     buildCmd = None
     if compiler == "cl":
