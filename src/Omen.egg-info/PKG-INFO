@@ -10,3 +10,6 @@ Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 
 Generates CL string for copmiling c/cc projects
+
+BUILD USING: python -m build
+INSTALL WHL: pip install name.whl
