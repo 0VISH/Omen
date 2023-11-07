@@ -36,8 +36,8 @@ def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", def
         for i in includes: defineStr += "/I " + i + " "
     else:
         for i in defines: defineStr += "-D " + i + "=true "
-        if plat == "win": defineStr = "-D WIN=true -D LIN=false "
-        else: defineStr = "-D WIN=false -D LIN=true "
+        if plat == "win": defineStr += "-D WIN=true -D LIN=false "
+        else: defineStr += "-D WIN=false -D LIN=true "
         if isDbg: defineStr += "-D RLS=false -D DBG=true -O0 -g -gcodeview "
         else: defineStr += "-D RLS=false -D DBG=false -O3 "
         for i in includes: defineStr += "-I " + i + " "
@@ -54,10 +54,6 @@ def build(main, outName, compiler, intermediateOnly=False, extraSwitches="", def
             buildCmd += main + " /Fo:" + fileName + ".obj /Fd:" + fileName + ".pdb /Fe:" + fileName + ".exe"
     else:
         buildCmd = compiler + defineStr + extraSwitches + " "
-        buildCmd += main + " -c -o "+fileName
-        if plat == "win": buildCmd += ".obj "
-        else: buildCmd += ".o "
-        if intermediateOnly == False:
-            buildCmd += "-o " + fileName
+        buildCmd += main + " -o " + fileName + ".out"
 
     runCmd(buildCmd, plat=="lin")
